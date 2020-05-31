@@ -10,15 +10,18 @@ namespace Gameplay.Spaceships
     {
         [SerializeField]
         private ShipController _shipController;
-    
+
         [SerializeField]
         private MovementSystem _movementSystem;
-    
+
         [SerializeField]
         private WeaponSystem _weaponSystem;
 
         [SerializeField]
         private UnitBattleIdentity _battleIdentity;
+
+        [SerializeField]
+        private float _health;
 
 
         public MovementSystem MovementSystem => _movementSystem;
@@ -34,7 +37,17 @@ namespace Gameplay.Spaceships
 
         public void ApplyDamage(IDamageDealer damageDealer)
         {
-            Destroy(gameObject);
+            if (_health > 0)
+            {
+                _health -= damageDealer.Damage;
+            }
+            else
+            {
+                Destroy(gameObject);
+            }
+
+
+            
         }
 
     }

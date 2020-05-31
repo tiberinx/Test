@@ -16,8 +16,10 @@ public class PlayerMoveBoundaries : MonoBehaviour
         // Определяем края экрана. Код взят из GameAreaHelper.IsInGameplayArea.
         _camera = Camera.main;
         camPos = _camera.transform.position;
+
         camHalfHeight = _camera.orthographicSize;
         camHalfWidth = camHalfHeight * _camera.aspect;
+
         leftBound = camPos.x - camHalfWidth;
         rightBound = camPos.x + camHalfWidth;
 
