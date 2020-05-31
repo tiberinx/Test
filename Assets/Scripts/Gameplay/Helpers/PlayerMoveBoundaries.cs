@@ -13,7 +13,7 @@ public class PlayerMoveBoundaries : MonoBehaviour
 
     void Start()
     {
-        // Определяем края экрана. Код взят из GameAreaHelper.IsInGameplayArea
+        // Определяем края экрана. Код взят из GameAreaHelper.IsInGameplayArea.
         _camera = Camera.main;
         camPos = _camera.transform.position;
         camHalfHeight = _camera.orthographicSize;
@@ -21,15 +21,20 @@ public class PlayerMoveBoundaries : MonoBehaviour
         leftBound = camPos.x - camHalfWidth;
         rightBound = camPos.x + camHalfWidth;
 
-        // Граница объекта Игрок
+        // Ширина Игрока от центра до края
         playerWidth = transform.GetComponent<SpriteRenderer>().bounds.size.x / 2;
+
+        //Граница экрана с учетом ширины Игрока, чтобы не вылезал наполовину.
+        leftBound += playerWidth;
+        rightBound -= playerWidth;
     }
 
 
     void LateUpdate()
     {
-        //Не даём вылезти игроку за границы экрана. Если не учитывать ширину объекта Игрок, он будет вылезать за экран наполовину. Поэтому leftBound + playerWidth, rightBound - playerWidth
-        transform.position = new Vector3(Mathf.Clamp(transform.position.x, leftBound + playerWidth, rightBound - playerWidth ), transform.position.y, transform.position.z);
-
+        //Не даём вылезти игроку за границы экрана.
+        var _transPos = transform.position;
+        _transPos = new Vector3(Mathf.Clamp(_transPos.x, leftBound, rightBound), _transPos.y, _transPos.z);
+        transform.position = _transPos;
     }
 }
