@@ -8,6 +8,7 @@ namespace Gameplay.Spaceships
 {
     public class Spaceship : MonoBehaviour, ISpaceship, IDamagable
     {
+
         [SerializeField]
         private ShipController _shipController;
 
@@ -20,14 +21,16 @@ namespace Gameplay.Spaceships
         [SerializeField]
         private UnitBattleIdentity _battleIdentity;
 
+        // Количество здоровья корабля.
         [SerializeField]
-        private float _health;
-
+        public float health;
 
         public MovementSystem MovementSystem => _movementSystem;
         public WeaponSystem WeaponSystem => _weaponSystem;
 
         public UnitBattleIdentity BattleIdentity => _battleIdentity;
+
+
 
         private void Start()
         {
@@ -37,17 +40,16 @@ namespace Gameplay.Spaceships
 
         public void ApplyDamage(IDamageDealer damageDealer)
         {
-            if (_health > 0)
+            if (health > 0)
             {
-                _health -= damageDealer.Damage;
+                // Уменьшаем уровень здоровья после урона.
+                health -= damageDealer.Damage;
             }
             else
             {
                 Destroy(gameObject);
             }
 
-
-            
         }
 
     }
