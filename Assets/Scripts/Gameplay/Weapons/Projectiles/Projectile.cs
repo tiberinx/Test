@@ -1,11 +1,10 @@
-﻿using System;
-using Gameplay.Helpers;
-using UnityEngine;
+﻿using UnityEngine;
 
 namespace Gameplay.Weapons.Projectiles
 {
     public abstract class Projectile : MonoBehaviour, IDamageDealer
     {
+
 
         [SerializeField]
         private float _speed;
@@ -26,7 +25,6 @@ namespace Gameplay.Weapons.Projectiles
         {
             _battleIdentity = battleIdentity;
         }
-        
 
         private void Update()
         {
@@ -43,11 +41,10 @@ namespace Gameplay.Weapons.Projectiles
             {
                 damagableObject.ApplyDamage(this);
                 Destroy(gameObject);
+
             }
         }
         
-
-
         protected abstract void Move(float speed);
     }
 }

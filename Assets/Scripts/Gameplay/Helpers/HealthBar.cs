@@ -10,7 +10,6 @@ namespace Gameplay.Helpers
         {
             _health = PlayerHealth.Health;
             GetComponent<RectTransform>().SetSizeWithCurrentAnchors(RectTransform.Axis.Horizontal, _health);
-
         }
     }
 }
