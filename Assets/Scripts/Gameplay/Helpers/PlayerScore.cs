@@ -15,7 +15,7 @@ namespace Gameplay.Helpers
 
         void Update()
         {
-            GetComponent<Text>().text = "Hit score " + score;
+            GetComponent<Text>().text = "Player score: " + score;
         }
     }
 }

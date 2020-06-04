@@ -5,6 +5,7 @@ namespace Gameplay.ShipControllers.CustomControllers
 {
     public class PlayerShipController : ShipController
     {
+        
         protected override void ProcessHandling(MovementSystem movementSystem)
         {
             movementSystem.LateralMovement(Input.GetAxis("Horizontal") * Time.deltaTime);
@@ -17,5 +18,6 @@ namespace Gameplay.ShipControllers.CustomControllers
                 fireSystem.TriggerFire();
             }
         }
+
     }
 }

@@ -1,9 +1,11 @@
 ﻿using Gameplay.Helpers;
 using Gameplay.ShipControllers;
+using Gameplay.ShipControllers.CustomControllers;
 using Gameplay.ShipSystems;
 using Gameplay.Weapons;
 using UnityEngine;
 using UnityEngine.Events;
+using UnityEngine.SceneManagement;
 
 namespace Gameplay.Spaceships
 {
@@ -13,6 +15,9 @@ namespace Gameplay.Spaceships
         // Создаём события для подсчёта очков за уничтоженные корабли.
         UnityEvent RewardEvent = new UnityEvent();
         UnityEvent PlayerScoreEvent = new UnityEvent();
+
+        // Создаём событие конца игры при поражении.
+        UnityEvent GameOverEvent = new UnityEvent();        
 
         [SerializeField]
         private ShipController _shipController;
@@ -45,6 +50,7 @@ namespace Gameplay.Spaceships
             // Назначаем слушателей в Reward.cs и PlayScore.cs.
             RewardEvent.AddListener(Reward.Listen);
             PlayerScoreEvent.AddListener(PlayerScore.AddRewardProperty);
+            GameOverEvent.AddListener(GameOverScreen.GameOver);           
 
         }
 
@@ -55,13 +61,29 @@ namespace Gameplay.Spaceships
                 // Уменьшаем уровень здоровья после урона.
                 health -= damageDealer.Damage;
             }
-            else
+            if (health <= 0)
             {
-                Destroy(gameObject);
+                if (gameObject.tag == "Player")
+                {
+                    
+                    Destroy(gameObject);
+                    // Остановка игры после смерти Игрока.
+                    Time.timeScale = 0;
+                    //Вызываем событие конца игры при поражении.
+                    GameOverEvent.Invoke();                   
+                    
+                }
+                else
+                {
+                    Destroy(gameObject);
 
-                //Вызываем события для подсчёта очков Игрока
-                RewardEvent.Invoke();
-                PlayerScoreEvent.Invoke();
+                    //Вызываем события для подсчёта очков Игрока.
+                    RewardEvent.Invoke();
+                    PlayerScoreEvent.Invoke();
+                }
+                
+
+
             }
 
         }

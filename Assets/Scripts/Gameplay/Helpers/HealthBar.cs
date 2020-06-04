@@ -6,7 +6,7 @@ namespace Gameplay.Helpers
     {
         private float _health;
 
-        public void Update()
+        private void Update()
         {
             _health = PlayerHealth.Health;
             GetComponent<RectTransform>().SetSizeWithCurrentAnchors(RectTransform.Axis.Horizontal, _health);

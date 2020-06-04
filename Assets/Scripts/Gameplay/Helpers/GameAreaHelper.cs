@@ -1,19 +1,22 @@
-﻿using UnityEngine;
+﻿using System.Runtime.CompilerServices;
+using UnityEngine;
+
 
 namespace Gameplay.Helpers
 {
     public static class GameAreaHelper
     {
 
-        private static Camera _camera;
+        public static Camera _camera;
         
 
         static GameAreaHelper()
         {
             _camera = Camera.main;
+            
         }
 
-        
+
         public static bool IsInGameplayArea(Transform objectTransform, Bounds objectBounds)
         {
             var camHalfHeight = _camera.orthographicSize;

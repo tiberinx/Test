@@ -36,3 +36,4 @@ public class PlayerMoveBoundaries : MonoBehaviour
         transform.position = _transPos;
     }
 }
+// Скрипт, ограничивающий перемещение игрока за границы экрана (Только по горизонтали).
