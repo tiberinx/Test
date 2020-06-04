@@ -54,6 +54,7 @@ namespace Gameplay.Spaceships
 
         }
 
+        private int _hitpoint = 2;
         public void ApplyDamage(IDamageDealer damageDealer)
         {
             if (health > 0)
@@ -76,10 +77,14 @@ namespace Gameplay.Spaceships
                 else
                 {
                     Destroy(gameObject);
+                    _hitpoint--;            // Убираем баг с задвоением очков при одновременном попадании двух лазеров
+                    if (_hitpoint > 0)
+                    {
+                        //Вызываем события для подсчёта очков Игрока.
+                        RewardEvent.Invoke();
+                        PlayerScoreEvent.Invoke();
+                    }
 
-                    //Вызываем события для подсчёта очков Игрока.
-                    RewardEvent.Invoke();
-                    PlayerScoreEvent.Invoke();
                 }
                 
 
