@@ -10,7 +10,7 @@ namespace Gameplay.ShipSystems
         
         [SerializeField]
         private float _longitudinalMovementSpeed;
-    
+
 
         public void LateralMovement(float amount)
         {
@@ -22,7 +22,6 @@ namespace Gameplay.ShipSystems
             Move(amount * _longitudinalMovementSpeed, Vector3.up);
         }
 
-        
         private void Move(float amount, Vector3 axis)
         {
             transform.Translate(amount * axis.normalized);

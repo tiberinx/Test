@@ -47,7 +47,7 @@ namespace Gameplay.Spaceships
             _shipController.Init(this);
             _weaponSystem.Init(_battleIdentity);
 
-            // Назначаем слушателей в Reward.cs и PlayScore.cs.
+            // Назначаем слушателей в Reward.cs, PlayScore.cs и GameOverScreen.cs.
             RewardEvent.AddListener(Reward.Listen);
             PlayerScoreEvent.AddListener(PlayerScore.AddRewardProperty);
             GameOverEvent.AddListener(GameOverScreen.GameOver);           

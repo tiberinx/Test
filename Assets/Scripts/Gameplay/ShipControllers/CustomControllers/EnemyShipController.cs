@@ -9,6 +9,8 @@ public class EnemyShipController : ShipController
 
     [SerializeField]
     private Vector2 _fireDelay;
+
+    // Выбираем, в каком направлении двигаться противнику.
     public bool MoveRight;
     public bool MoveLeft;
 
@@ -20,6 +22,8 @@ public class EnemyShipController : ShipController
 
          movementSystem.LongitudinalMovement(Time.deltaTime);
 
+        // Меняем направление движения противника.
+
         if (MoveRight)
         {
             movementSystem.LateralMovement(Time.deltaTime);
@@ -28,6 +32,7 @@ public class EnemyShipController : ShipController
         {
             movementSystem.LateralMovement(Time.deltaTime * -1);
         }
+
     }
 
     protected override void ProcessFire(WeaponSystem fireSystem)
