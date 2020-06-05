@@ -9,12 +9,25 @@ public class EnemyShipController : ShipController
 
     [SerializeField]
     private Vector2 _fireDelay;
+    public bool MoveRight;
+    public bool MoveLeft;
+
 
     private bool _fire = true;
     
     protected override void ProcessHandling(MovementSystem movementSystem)
     {
-        movementSystem.LongitudinalMovement(Time.deltaTime);
+
+         movementSystem.LongitudinalMovement(Time.deltaTime);
+
+        if (MoveRight)
+        {
+            movementSystem.LateralMovement(Time.deltaTime);
+        }
+        if (MoveLeft)
+        {
+            movementSystem.LateralMovement(Time.deltaTime * -1);
+        }
     }
 
     protected override void ProcessFire(WeaponSystem fireSystem)
